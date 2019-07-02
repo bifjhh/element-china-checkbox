@@ -6,8 +6,6 @@
 
 ## 示例
 
-![QQ20190702-220441-HD](/Users/sunkun/Desktop/Code/element-china-checkbox/QQ20190702-220441-HD.gif)
-
 
 ## 使用
 

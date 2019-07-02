@@ -7,13 +7,13 @@ const config = {
   mode: "production",
   entry: "./src/main.js",
   output: {
-    path: resolve(__dirname, "./docs"),
+    path: resolve(__dirname, "./"),
     filename: "main.js"
   },
   resolve: {
     // 配置别名，在项目中可缩减引用路径
     alias: {
-      src: join(__dirname, "/src")
+      src: join(__dirname, "./src")
     }
   },
   module: {
