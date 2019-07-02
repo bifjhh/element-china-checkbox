@@ -1,0 +1,64 @@
+{
+  "private": false,
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "author": "bifjhh <929160004@qq.com>",
+  "bugs": {
+    "url": "https://github.com/bifjhh/element-china-checkbox/issues"
+  },
+  "dependencies": {
+    "china-area-data": "^4.0.0",
+    "lodash": "^4.17.10"
+  },
+  "description": "Element UI 级联 中国省市区数据 复选框",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-component": "^1.1.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "element-ui": "^2.4.5",
+    "file-loader": "^1.1.5",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.21.0",
+    "uglify-js": "^3.4.6",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "url-loader": "^1.0.1",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.2.6",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "homepage": "https://github.com/bifjhh/element-china-checkbox#readme",
+  "keywords": [
+    "element",
+    "elementui",
+    "element-ui",
+    "vue",
+    "省市区",
+    "级联",
+    "复选框"
+  ],
+  "license": "MIT",
+  "main": "src/app.js",
+  "name": "element-china-checkbox",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bifjhh/element-china-checkbox.git"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.build.config.js --progress --hide-modules",
+    "dev": "webpack-dev-server --config webpack.dev.config.js --inline --hot",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.1.0"
+}
