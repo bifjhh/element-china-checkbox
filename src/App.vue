@@ -19,11 +19,11 @@
       <!-- 此处渲染省级 -->
       <div class="pid_ck_for" v-for="(pname, pid) in REGION_DATA[86]" :key="pid">
         <el-checkbox class="ck_box" :label="pid"><span  class="pid_title" :class="'pid'+pid">{{pname}}</span>
-          <el-checkbox-group class="c_ck_box" v-model="cityId"  @change="cidChange">
+          <el-checkbox-group class="c_ck_box" v-model="cityId"  @change="checked=>cidChange(checked,pid)">
             <!-- 此处渲染市级 -->
             <div class="cid_ck_for" v-for="(cname, cid) in REGION_DATA[pid]" :key="cid" >
               <el-checkbox class="cid_ck_box" :label="cid"><span class="cid_title" :class="'cid'+cid">{{cname}}</span></span>
-                <el-checkbox-group class="a_ck_box" v-model="areaId" @change="aidChange">
+                <el-checkbox-group class="a_ck_box" v-model="areaId" @change="checked=>aidChange(checked,pid,cid)">
                   <!-- 此处渲染区县 -->
                   <el-checkbox v-for="(aname, aid) in REGION_DATA[cid]" :key="aid" :label="aid"><span class="aid_title" :class="'aid'+aid">{{aname}}</span></el-checkbox>
                   <div class="clear_box">
@@ -92,7 +92,7 @@
         }
         this.$emit('getElData',checkData)
         console.log(checkData)
-
+      
         
       },
 
@@ -113,9 +113,13 @@
       },
 
       // 匹配市级变动
-      cidChange(v) {
+      cidChange(v,pid) {
         const change = this.isRemove(this.old_cityId, v, 'areaId', null, 'cityId')
-        if (change.length) this.old_cityId = [...v]
+        
+        if (!change.length) return
+        this.old_cityId = [...v]
+        if (!~this.provinceId.indexOf(pid)) this.provinceId.push(pid)
+        
         change.forEach(e => {
           const keys = Object.keys(this.REGION_DATA[e])
           this.setCk('areaId', keys, null)
@@ -123,7 +127,16 @@
       },
 
       // 匹配区县级变动
-      aidChange(v) {
+      aidChange(v,pid,cid) {
+        if (typeof v !== 'object') return 
+
+        if (v.length > this.old_areaId.length) {
+          if (!~this.provinceId.indexOf(pid)) this.provinceId.push(pid)
+          if (!~this.cityId.indexOf(cid)) this.cityId.push(cid)
+          if (!~this.old_provinceId.indexOf(pid)) this.provinceId.push(pid)
+          if (!~this.old_cityId.indexOf(cid)) this.cityId.push(cid)
+        }
+
         this.old_areaId = v
       },
 
