@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "china-area-data": "^4.0.0",
-    "element-china-checkbox": "^1.1.7"
+    "element-china-checkbox": "file:element-china-checkbox"
   },
   "description": "Element UI 级联 中国省市区数据 复选框",
   "devDependencies": {
