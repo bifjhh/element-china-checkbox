@@ -63,6 +63,19 @@ components: {
 </element-china-checkbox>
 ```
 
+#### 使用this.$refs来获取数据
+- 如果觉得按钮对整体风格有所影响,则可以通过传入 `Submit=false` 来控制是否显示按钮以及自定义事件
+```html
+<element-china-checkbox :Submit="false"> </element-china-checkbox>
+```
+- 使用`this.$refs`来获取数据
+```js
+  const checkboxData = this.$refs.xxxx
+  const province_id = checkboxData.provinceId
+  const city_id = checkboxData.cityId
+  const region_id = checkboxData.areaId
+```
+
 ## 数据来源
 
 [china-area-data v4.0.0](https://github.com/airyland/china-area-data)
