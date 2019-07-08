@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "china-area-data": "^4.0.0",
-    "lodash": "^4.17.10"
+    "element-china-checkbox": "^1.1.7"
   },
   "description": "Element UI 级联 中国省市区数据 复选框",
   "devDependencies": {
@@ -50,7 +50,7 @@
   ],
   "license": "MIT",
   "main": "src/app.js",
-  "name": "element-china-checkbox",
+  "name": "china-checkbox",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bifjhh/element-china-checkbox.git"

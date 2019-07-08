@@ -75,6 +75,20 @@ components: {
   const city_id = checkboxData.cityId
   const region_id = checkboxData.areaId
 ```
+#### 传入已选择的数据
+```html
+<element-china-checkbox :Submit="false" :Selected="selectedData"> </element-china-checkbox>
+```
+
+```js
+/* 注意,数组内ID为String类型 */
+const selectedData = {
+  provinceId: [] // 已选择的省份
+  cityId: [] // 已选择市级区域
+  areaId: [] // 已选择的区县
+}
+
+```
 
 ## 数据来源
 
