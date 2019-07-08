@@ -46,11 +46,13 @@
     name: 'element-china-checkbox',
     created() {
      setTimeout(() => {
-       this.REGION_DATA = chinaData
+        this.REGION_DATA = chinaData
      }, 0)
-      this.provinceId = this.old_provinceId = this.Selected.provinceId || []
-      this.cityId = this.old_cityId = this.Selected.cityId || []
-      this.areaId = this.old_areaId = this.Selected.areaId || []
+     if (this.Selected) {
+       this.provinceId = this.old_provinceId = this.Selected.provinceId || []
+       this.cityId = this.old_cityId = this.Selected.cityId || []
+       this.areaId = this.old_areaId = this.Selected.areaId || []
+     }
     },
     props: {
       Submit: {
