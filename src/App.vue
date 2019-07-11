@@ -12,6 +12,16 @@
       <div class="text">已选择区县ID: areaId</div>
       <h5>为了达到预览效果则在当前页面中展示所选择的数据,也可以在控制台查看</h5>
     </div>
+    <el-form ref="form" :model="testForm" label-width="80px" :inline="true" >
+      <el-form-item label="测试输入延迟1">
+        <el-input v-model="testForm.name"></el-input>
+      </el-form-item>
+      <div>
+        <el-form-item label="测试输入延迟2">
+          <el-input v-model="testForm.name2"></el-input>
+        </el-form-item>
+      </div>
+    </el-form>
     <element-china-checkbox ref="checkbox" :Submit="false" :Selected="selectedData">确认</element-china-checkbox>
     <div class="submit">
       <el-button type="primary" plain @click="saveAndBack">输出数据</el-button>
@@ -25,22 +35,24 @@
 </template>
 
 <script>
-  // import elementChinaCheckbox from 'element-china-checkbox'
   export default {
     name: 'china-checkbox',
     mounted() {},
-    data: () => ({
-      provinceId: [],
-      selectedData: {
-        provinceId: ['110000'],
-        cityId: ['110100'],
-        areaId: ['110101','110102']
-      },
-      cityId: [],
-      areaId: [],
-      showData: false,
-      loading: true
-    }),
+    data() {
+      return {
+        provinceId: [],
+        testForm: {},
+        selectedData: {
+          provinceId: ['110000'],
+          cityId: ['110100'],
+          areaId: ['110101','110102']
+        },
+        cityId: [],
+        areaId: [],
+        showData: false,
+        loading: true
+      }
+    },
     methods: {
       saveAndBack() {
         this.getFormData()

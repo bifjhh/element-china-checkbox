@@ -8,28 +8,28 @@
       <el-checkbox class="ck_box" :label="pid"><span  class="pid_title" :class="'pid'+pid">{{pname}}</span>
         <el-checkbox-group class="c_ck_box" v-model="cityId"  @change="checked=>cidChange(checked,pid)">
           <!-- 此处渲染市级 -->
-          <div class="cid_ck_for" v-for="(cname, cid) in REGION_DATA[pid]" :key="cid" >
-            <el-checkbox class="cid_ck_box" :label="cid"><span class="cid_title" :class="'cid'+cid">{{cname}}</span></span>
-              <el-checkbox-group class="a_ck_box" v-model="areaId" @change="checked=>aidChange(checked,pid,cid)">
-                <!-- 此处渲染区县 -->
-                <el-checkbox v-for="(aname, aid) in REGION_DATA[cid]" :key="aid" :label="aid"><span class="aid_title" :class="'aid'+aid">{{aname}}</span></el-checkbox>
-                <div class="clear_box">
-                  <!-- 此处关闭下拉菜单 -->
-                  <el-checkbox @click.native.prevent="clearBox('.cid'+cid)">关闭</el-checkbox>
-                </div>
-              </el-checkbox-group>
-            </el-checkbox>
-            <!-- 此处开启下拉菜单 -->
-            <el-checkbox :class="'triangle_box'" @click.native.prevent="changeStyle(('.cid'+cid), '.a_ck_box')"><div class="triangle-down"></div></el-checkbox>
-          </div>
-          <!-- 此处关闭下拉菜单 -->
-          <div class="clear_box">
-            <el-checkbox @click.native.prevent="clearBox('.pid'+pid)">关闭</el-checkbox>
+          <div v-if="CityList[pid]" class="c_if_box">
+            <div class="cid_ck_for" v-for="(cname, cid) in CityList[pid]" :key="cid" >
+              <el-checkbox class="cid_ck_box" :label="cid"><span class="cid_title" :class="'cid'+cid">{{cname}}</span></span>
+                <el-checkbox-group class="a_ck_box" v-model="areaId" @change="checked=>aidChange(checked,pid,cid)">
+                  <!-- 此处渲染区县 -->
+                  <div v-if="AreaList[cid]" class="a_if_box">
+                    <el-checkbox v-for="(aname, aid) in AreaList[cid]" :key="aid" :label="aid"><span class="aid_title" :class="'aid'+aid">{{aname}}</span></el-checkbox>
+                    <!-- 此处关闭区县下拉菜单 -->
+                    <div class="clear_box"><el-checkbox @click.native.prevent="clearBox($event, '.cid'+cid)">关闭</el-checkbox></div>
+                  </div>
+                </el-checkbox-group>
+              </el-checkbox>
+              <!-- 此处开启区县下拉菜单 -->
+              <el-checkbox :class="'triangle_box'" @click.native.prevent="changeStyle($event, ('.cid'+cid), '.a_ck_box', 'AreaList', cid)"><div class="triangle-down"></div></el-checkbox>
+            </div>
+            <!-- 此处关闭市级下拉菜单 -->
+            <div class="clear_box"><el-checkbox @click.native.prevent="clearBox($event, '.pid'+pid)">关闭</el-checkbox></div>
           </div>
         </el-checkbox-group>
       </el-checkbox>
-      <!-- 此处开启下拉菜单 -->
-      <el-checkbox :class="'triangle_box'" @click.native.prevent="changeStyle(('.pid'+pid), '.c_ck_box')"><div class="triangle-down"></div></el-checkbox>
+      <!-- 此处开启市级下拉菜单 -->
+      <el-checkbox :class="'triangle_box'" @click.native.prevent="changeStyle($event,('.pid'+pid), '.c_ck_box', 'CityList', pid)"><div class="triangle-down"></div></el-checkbox>
     </div>
   </el-checkbox-group>
   <div class="submit" v-if="Submit">
@@ -64,16 +64,20 @@
         default: () => {}
       }
     },
-    data: () => ({
-      REGION_DATA: {},
-      provinceId: [],
-      cityId: [],
-      areaId: [],
-      old_provinceId: [],
-      old_cityId: [],
-      old_areaId: [],
-      showData: false
-    }),
+    data() {
+      return {
+        REGION_DATA: {},
+        provinceId: [],
+        cityId: [],
+        areaId: [],
+        old_provinceId: [],
+        old_cityId: [],
+        old_areaId: [],
+        CityList: {},
+        AreaList: {},
+        showData: false
+      }
+    },
     methods: {
       saveAndBack() {
         this.showData = true
@@ -189,9 +193,9 @@
       },
 
       // 设置class样式
-      changeStyle(key, nextKey) {
-        // 获取当前菜单盒子
-        const boxDOM = document.querySelector(key).offsetParent.querySelector(nextKey)
+      changeStyle(event, key, nextKey, arrKey, nextId) {
+        this[arrKey] = { [nextId]: this.REGION_DATA[nextId] }
+        const boxDOM = event.currentTarget.parentElement.querySelector(nextKey)
         // 获取所有盒子列表项
         const list = document.querySelectorAll(nextKey)
         list.forEach(e => {
@@ -201,8 +205,8 @@
       },
 
       // 关闭下级出菜单
-      clearBox(key) {
-        const boxDOM = document.querySelector(key).offsetParent.querySelector('.el-checkbox-group')
+      clearBox(event, key) {
+        const boxDOM = event.currentTarget.parentElement.parentElement.parentElement
         boxDOM.style.display = 'none'
       }
     }
@@ -333,6 +337,11 @@
     padding-right: 15px;
     margin-left: -8px;
   }
+}
+.c_if_box,.a_if_box{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 .submit{
   margin-top: 50px;
