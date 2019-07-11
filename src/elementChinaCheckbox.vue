@@ -21,7 +21,7 @@
                 </el-checkbox-group>
               </el-checkbox>
               <!-- 此处开启区县下拉菜单 -->
-              <el-checkbox :class="'triangle_box'" @click.native.prevent="changeStyle($event, ('.cid'+cid), '.a_ck_box', 'AreaList', cid)"><div class="triangle-down"></div></el-checkbox>
+              <el-checkbox :class="'triangle_box'" @click.native.prevent="changeStyle($event, ('.cid'+cid), '.a_ck_box', 'AreaList', cid)"><div class="triangle-down" v-if="REGION_DATA[cid]"></div></el-checkbox>
             </div>
             <!-- 此处关闭市级下拉菜单 -->
             <div class="clear_box"><el-checkbox @click.native.prevent="clearBox($event, '.pid'+pid)">关闭</el-checkbox></div>
@@ -274,7 +274,7 @@
     padding: 10px;
     padding-bottom: 5px;
     .a_ck_box{
-      width: 500px;
+      width: 300px;
       display: flex;
       display: none;
       flex-wrap: wrap;
