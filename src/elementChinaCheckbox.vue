@@ -41,7 +41,7 @@
 </template>
 
 <script>
-  import chinaData from 'china-area-data'
+  import chinaData from './data'
   export default {
     name: 'element-china-checkbox',
     created() {

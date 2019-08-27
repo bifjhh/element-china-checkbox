@@ -3,6 +3,7 @@ import { CheckboxGroup, Checkbox, Button, Loading, Form, FormItem, Input } from 
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 // import elementChinaCheckbox from '../element-china-checkbox/src/app'
+// import elementChinaCheckbox from './elementChinaCheckbox'
 import elementChinaCheckbox from 'element-china-checkbox'
 
 Vue.use(elementChinaCheckbox)
