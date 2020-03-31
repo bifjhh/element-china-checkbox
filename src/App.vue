@@ -22,7 +22,7 @@
         </el-form-item>
       </div>
     </el-form>
-    <element-china-checkbox ref="checkbox" :Submit="false" :Selected="selectedData">确认</element-china-checkbox>
+    <element-china-checkbox ref="checkbox" :Submit="false" :Selected="selectedData" :MapData="MapData">确认</element-china-checkbox>
     <div class="submit">
       <el-button type="primary" plain @click="saveAndBack">输出数据</el-button>
     </div>
@@ -35,12 +35,14 @@
 </template>
 
 <script>
+  import chinaData from './data2'
   export default {
     name: 'china-checkbox',
     mounted() {},
     data() {
       return {
         provinceId: [],
+        MapData: chinaData,
         testForm: {},
         selectedData: {
           provinceId: ['110000'],

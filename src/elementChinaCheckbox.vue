@@ -46,8 +46,12 @@
     name: 'element-china-checkbox',
     created() {
      setTimeout(() => {
-        this.REGION_DATA = chinaData
-     }, 0)
+        if (this.empty(this.MapData)) {
+          this.REGION_DATA = this.MapData
+        } else {
+          this.REGION_DATA = chinaData
+        }
+     }, 10)
      if (this.Selected) {
        this.provinceId = this.old_provinceId = this.Selected.provinceId || []
        this.cityId = this.old_cityId = this.Selected.cityId || []
@@ -60,6 +64,14 @@
         default: true
       },
       Selected: {
+        type: Object,
+        default: () => {}
+      },
+      chinaData: {
+        type: Object,
+        default: () => {}
+      },
+      MapData: {
         type: Object,
         default: () => {}
       }
@@ -79,6 +91,17 @@
       }
     },
     methods: {
+      // 判断Object是否为空
+      empty(obj){
+        let flag = false
+        for (let key in obj){
+          if (key) {
+            flag = true
+            break
+          }
+        }
+        return flag
+      },
       saveAndBack() {
         this.showData = true
         const checkData = {
